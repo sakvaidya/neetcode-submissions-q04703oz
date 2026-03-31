@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        vector<int> out(nums.size(), 0);
+        int i = 0;
+        int tz = -1;
+        int prod = 1;
+        for (int k = 0; k < nums.size(); k++) {
+            if (nums[k] == 0 && (tz != -1)) {
+                return out;
+            } else if (nums[k] == 0 && (tz == -1)) {
+                tz = k;
+            } else {
+                prod *= nums[k];
+            }
+        }
+        for (int i = 0; i < nums.size(); i++) {
+            if (tz == -1) {
+                out[i] = prod/nums[i]; 
+            } else {
+                if (i == tz) {
+                    out[i] = prod;
+                } else {
+                    out[i] = 0;
+                }
+            }
+        }
+        return out;
+    }
+};
